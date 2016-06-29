@@ -2,10 +2,6 @@ package com.idtech.danielpoag.finalproject2dstealthgame;
 
 import android.graphics.Canvas;
 
-/*
-    @TODO knockout checking
-*/
-
 public class Player {
     private static int directionFacing = 4;
     public static int playerX = 50;
