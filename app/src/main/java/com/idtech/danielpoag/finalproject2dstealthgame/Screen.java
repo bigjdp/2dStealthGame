@@ -8,7 +8,6 @@ import android.graphics.Rect;
 public class Screen {
     public static Rect[][] screenQuadrants = new Rect[10][15];
     public static Object[][] visibleScreen = new Object[10][15];
-    public static Object lock = new Object();
 
     public Screen() {
         /*try{

@@ -11,25 +11,27 @@ import android.content.Context;
         import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.view.MotionEvent;
-        import android.view.SurfaceHolder;
+import android.view.SurfaceHolder;
         import android.view.SurfaceView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameThread thread;
     public static Player player = new Player();
-    public static Screen screen;
+    public static Screen screen = new Screen();
     public static Level level = new Level();
     public Paint myPaint = new Paint();
-    public static boolean win;
+    public static boolean win = false;
 
-    Boolean[] objectivesActivated = new Boolean[3];
-    int objectivesIterator;
+    Boolean[] objectivesActivated = {false, false, false};
 
     public GameView(Context context) {
         super(context);
         getHolder().addCallback(this);
+
+        myPaint.setColor(Color.rgb(255, 255, 255));
+        myPaint.setStrokeWidth(10);
+        myPaint.setStyle(Paint.Style.STROKE);
 
         thread = new GameThread(getHolder(), this);
         setFocusable(true);
@@ -43,27 +45,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
-        screen = new Screen();
-        for (int i = 0; i < 3; i++)
-        {
-            objectivesActivated[i] = false;
-        }
-        myPaint.setColor(Color.rgb(255, 255, 255));
-        myPaint.setStrokeWidth(10);
-        myPaint.setStyle(Paint.Style.STROKE);
-        win = false;
+        //screen = new Screen();
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        boolean retry = true;
+        /*boolean retry = true;
         while(retry) {
             try {
                 thread.join();
                 retry = false;
             } catch (InterruptedException e) {
             }
-        }
+        }*/
     }
 
     @Override
@@ -74,7 +68,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             for (int x = 0; x < 15; x++){
                 for (int y = 0; y < 10; y++){
-                    if (screen.screenQuadrants[y][x].contains((int)touchX,(int)touchY)){
+                    if (Screen.screenQuadrants[y][x].contains((int)touchX,(int)touchY)){
                         player.move(x, y);
                         System.out.println(x + "," + y);
                     }
@@ -87,7 +81,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
-        if (win == true){
+        if (win){
             winner();
         }
         screen.screenUpdate();
