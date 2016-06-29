@@ -2,9 +2,6 @@ package com.idtech.danielpoag.finalproject2dstealthgame;
 
 import android.graphics.Canvas;
 
-/**
- * Created by student on 6/28/2016.
- */
 public class Objective {
     public boolean activated;
 

@@ -16,7 +16,7 @@ public class Level {
     private static Object levelArray[][] = new Object[100][100];
     Random random = new Random();
 
-    public Level(){
+    public Level() {
         //Add level generation here. Place guards, Walls, objectives, and the player.
         setLevelRect(0,0,99,99,new Wall());
         setLevelRect(47, 47, 53, 53, null);
