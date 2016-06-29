@@ -17,8 +17,6 @@ import android.view.SurfaceHolder;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameThread thread;
-    public static Player player = new Player();
-    public static Screen screen = new Screen();
     public static Level level = new Level();
     public Paint myPaint = new Paint();
     public static boolean win = false;
@@ -45,7 +43,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
-        //screen = new Screen();
     }
 
     @Override
@@ -69,7 +66,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             for (int x = 0; x < 15; x++){
                 for (int y = 0; y < 10; y++){
                     if (Screen.screenQuadrants[y][x].contains((int)touchX,(int)touchY)){
-                        player.move(x, y);
+                        Player.move(x, y);
                         System.out.println(x + "," + y);
                     }
                 }
@@ -84,8 +81,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if (win){
             winner();
         }
-        screen.screenUpdate();
-        //System.out.println("Player is visually at: " + Player.visiblePlayerX + "," + Player.visiblePlayerY);
+        Screen.screenUpdate();
+        System.out.println("Player is visually at: " + Player.visiblePlayerX + "," + Player.visiblePlayerY);
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 15; x++){
                 if (Screen.visibleScreen[y][x] instanceof Player){
@@ -104,7 +101,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
         for (int y = 0; y < 10; y++){
             for (int x = 0; x < 15; x++){
-                canvas.drawRect(screen.screenQuadrants[y][x], myPaint);
+                canvas.drawRect(Screen.screenQuadrants[y][x], myPaint);
             }
         }
     }

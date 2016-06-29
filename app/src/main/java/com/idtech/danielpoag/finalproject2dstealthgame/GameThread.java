@@ -5,6 +5,7 @@ package com.idtech.danielpoag.finalproject2dstealthgame;
  */
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 public class GameThread extends Thread {
@@ -30,8 +31,7 @@ public class GameThread extends Thread {
             canvas = null;
             try {
                 canvas = this.surfaceHolder.lockCanvas();
-                //GameResources.screenHeight = canvas.getHeight();
-                //GameResources.screenWidth = canvas.getWidth();
+                Screen.init(canvas);
                 synchronized (surfaceHolder) {
                     this.gameView.onDraw(canvas);
                 }

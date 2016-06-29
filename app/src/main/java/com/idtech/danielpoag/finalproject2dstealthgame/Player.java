@@ -1,26 +1,19 @@
 package com.idtech.danielpoag.finalproject2dstealthgame;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-/**
- * Created by student on 6/27/2016.
- */
-
-/*To Do:
-* Add knock out checking*/
+/*
+    @TODO knockout checking
+*/
 
 public class Player {
-    private int directionFacing = 4;
+    private static int directionFacing = 4;
     public static int playerX = 50;
     public static int playerY = 50;
     public static int visiblePlayerX = 7;
     public static int visiblePlayerY = 4;
 
-    public Player(){
-    }
-
-    public void move(int xTouched, int yTouched){
+    public static void move(int xTouched, int yTouched){
         knockOutCheck();
         //MAKE IT NOT GO THROUGH WALLS.
         if (Math.abs((yTouched - 5)) < Math.abs((xTouched - 7))){
@@ -47,8 +40,8 @@ public class Player {
                 }
             }
             GameView.level.setLevelArray(playerX, playerY, null);
-            GameView.level.setLevelArray(playerX + xTouched - 7, playerY, GameView.player);
-            GameView.screen.screenUpdate();
+            GameView.level.setLevelArray(playerX + xTouched - 7, playerY, new Player());
+            Screen.screenUpdate();
             System.out.println("Player Moved");
         }
         else if (Math.abs((yTouched - 5)) > Math.abs((xTouched - 7))){
@@ -64,7 +57,7 @@ public class Player {
                     return;
                 }
                 GameView.level.setLevelArray(playerX, playerY, null);
-                GameView.level.setLevelArray(playerX, playerY + yTouched - 5, GameView.player);
+                GameView.level.setLevelArray(playerX, playerY + yTouched - 5, new Player());
                 System.out.println("Player Moved");
             }
             else{
@@ -78,24 +71,24 @@ public class Player {
                     return;
                 }
                 GameView.level.setLevelArray(playerX, playerY, null);
-                GameView.level.setLevelArray(playerX, playerY + yTouched - 5, GameView.player);
+                GameView.level.setLevelArray(playerX, playerY + yTouched - 5, new Player());
             }
-            GameView.screen.screenUpdate();
+            Screen.screenUpdate();
         }
 
         System.out.println("" + playerX + "," + playerY);
     }
 
-    public void knockOutCheck(){
+    public static void knockOutCheck(){
 
-    };
+    }
 
-    public int getDirectionFacing() {
+    public static int getDirectionFacing() {
         return directionFacing;
     }
 
-    public void setDirectionFacing(int directionFacing) {
-        this.directionFacing = directionFacing;
+    public static void setDirectionFacing(int dir) {
+        directionFacing = dir;
     }
 
     public void draw(Canvas canvas, int x, int y){

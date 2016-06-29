@@ -20,7 +20,7 @@ public class Level {
         //Add level generation here. Place guards, Walls, objectives, and the player.
         setLevelRect(0,0,99,99,new Wall());
         setLevelRect(47, 47, 53, 53, null);
-        setLevelArray(50, 50, GameView.player);
+        setLevelArray(50, 50, new Player());
         for (int x = 14; x < 84; x++){
                 for (int y = 14; y < 84; y++){
                     if (levelArray[y][x] == null && levelArray[y][x + 3] instanceof Wall){

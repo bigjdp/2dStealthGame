@@ -17,8 +17,6 @@ public class GameResources{
     public static Bitmap guarddown;
     public static Bitmap guardleft;
     public static Bitmap wall;
-    public static int screenHeight;
-    public static int screenWidth;
     public static Bitmap objectiveactive;
     public static Bitmap objectiveinactive;
 
@@ -34,8 +32,5 @@ public class GameResources{
         wall = BitmapFactory.decodeResource(c.getResources(), R.drawable.wall);
         objectiveactive = BitmapFactory.decodeResource(c.getResources(), R.drawable.objectiveactive);
         objectiveinactive = BitmapFactory.decodeResource(c.getResources(), R.drawable.objectiveinactive);
-        screenHeight = 1440;
-        screenWidth = 2392;
-
     }
 }
